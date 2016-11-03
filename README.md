@@ -27,7 +27,7 @@ services:
       - web
     environment:
       - SYNC_DESTINATION=/var/www/myapp
-      - SYNC_MAX_INOTIFY_WATCHES=40000
+      - SYNC_WAIT=30
       - SYNC_VERBOSE=1
     privileged: true
 ```
@@ -48,13 +48,7 @@ documented below.
     example above, for instance, this would be `/var/www/myapp`.
   * **`SYNC_VERBOSE`** (default: "0"): Set this variable to "1" to get more log
     output from Unison.
-  * **`SYNC_MAX_INOTIFY_WATCHES`** (default: ''): If set, the sync script will
-    attempt to increase the value of `fs.inotify.max_user_watches`. **IMPORTANT**:
-    This requires that you run this container as a priviliged container. Otherwise,
-    the inotify limit increase *will not work*. As always, when running a third
-    party container as a priviliged container, look through the source thoroughly
-    first to make sure it won't do anything nefarious. `sync.sh` should be pretty
-    understandable. Go on - read it. I'll wait.
+  * **`SYNC_WAIT`** (default: "30"): Wait time in seconds between unison repeats.
   * **`SYNC_EXTRA_UNISON_PROFILE_OPTS`** (default: ''): The value of this variable
     will be appended to the end of the Unison profile that's automatically generated
     when this container is started. Ensure that the syntax is valid. If you have
