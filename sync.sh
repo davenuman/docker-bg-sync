@@ -35,6 +35,11 @@ log_error_exit() {
 
 # The wait time in between repeated unison run.
 : ${SYNC_WAIT:="30"}
+if [ "${SYNC_WAIT}" == "watch" ];then
+  SYNC_WATCH=true
+else
+  SYNC_WATCH=false
+fi
 
 # This variable will be appended to the end of the Unison profile.
 : ${SYNC_EXTRA_UNISON_PROFILE_OPTS:=''}
@@ -98,6 +103,7 @@ maxthreads=10
 nodeletion=$SYNC_SOURCE
 prefer=$SYNC_SOURCE
 repeat=$SYNC_WAIT
+watch=$SYNC_WATCH
 silent=$unisonsilent
 
 # Files to ignore
